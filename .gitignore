@@ -1,3 +1,6 @@
+# app specific
+keys.js
+
 # Logs
 logs
 *.log
