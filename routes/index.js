@@ -1,20 +1,20 @@
-const express = require( 'express' );
+const passport = require( 'passport' );
 
-const app = express();
+module.exports = ( app ) => {
+  app.get( '/', function ( req, res ) {
+    res.send( { hello: 'world!' } );
+  } );
 
-app.get( '/', function ( req, res ) {
-  res.send( { hello: 'world!' } );
-} );
+  app.get( '/auth/google', passport.authenticate( 'google', {
+    scope: [ 'profile', 'email' ]
+  } )
+  );
 
-app.get( '/auth/google', passport.authenticate( 'google', {
-  scope: [ 'profile', 'email' ]
-} )
-);
-
-app.get( '/auth/google/callback',
-  passport.authenticate( 'google', { failureRedirect: '/' } ),
-  function ( req, res ) {
-    console.log( 'Authentication Success!' );
-    res.redirect( '/' );
-  }
-);
+  app.get( '/auth/google/callback',
+    passport.authenticate( 'google', { failureRedirect: '/' } ),
+    function ( req, res ) {
+      console.log( 'Authentication Success!' );
+      res.redirect( '/' );
+    }
+  );
+}
