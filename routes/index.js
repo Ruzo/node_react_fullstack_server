@@ -5,6 +5,14 @@ module.exports = ( app, passport ) => {
 
   app.get( '/login_error', ( req, res ) => res.send( { error: 'There was an error login in!' } ) );
   app.get( '/success', ( req, res ) => res.send( { login: 'Success!' } ) );
+  app.get( '/current_user', ( req, res ) => res.send( req.user ) );
+  app.get( '/logout', ( req, res ) => {
+    req.logout();
+    res.send( {
+      loggedOut: req.user ? false : true,
+      current_user: req.user
+    } );
+  } );
 
 
 
