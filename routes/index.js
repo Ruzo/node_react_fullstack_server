@@ -1,28 +1,31 @@
+const clog = console.log;
+
 module.exports = ( app, passport ) => {
-  app.get( '/', function ( req, res ) {
-    res.send( { hello: 'world!' } );
+  app.get( '/api/home', function ( req, res ) {
+    clog( req );
+    res.send( { user: req.user } );
   } );
 
-  app.get( '/login_error', ( req, res ) => res.send( { error: 'There was an error login in!' } ) );
-  app.get( '/success', ( req, res ) => res.send( { login: 'Success!' } ) );
-  app.get( '/current_user', ( req, res ) => res.send( req.user ) );
-  app.get( '/logout', ( req, res ) => {
+  app.get( '/api/login_error', ( req, res ) => res.send( { error: 'There was an error login in!' } ) );
+  app.get( '/api/success', ( req, res ) => res.send( { login: 'Success!' } ) );
+  app.get( '/api/current_user', ( req, res ) => {
+    clog( 'REQ inside current_user: ', req.user );
+    res.send( req.user || {} );
+  } );
+  app.get( '/api/logout', ( req, res ) => {
     req.logout();
-    res.send( {
-      loggedOut: req.user ? false : true,
-      current_user: req.user
-    } );
+    res.redirect( '/' );
   } );
 
 
 
-  app.get( '/auth/google', passport.authenticate( 'google', {
+  app.get( '/api/auth/google', passport.authenticate( 'google', {
     scope: [ 'profile', 'email' ]
   } )
   );
 
-  app.get( '/auth/google/callback',
-    passport.authenticate( 'google', { failureRedirect: '/login_error' } ), ( req, res ) => {
-      res.redirect( '/success' );
+  app.get( '/api/auth/google/callback',
+    passport.authenticate( 'google', { failureRedirect: '/api/login_error' } ), ( req, res ) => {
+      res.redirect( '/' );
     } );
 }

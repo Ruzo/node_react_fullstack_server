@@ -7,8 +7,31 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Server",
-      "program": "${workspaceFolder}/index.js"
+      "name": "nodemon",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceFolder}/index.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "debug react",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceRoot}/client/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Client/Server",
+      "configurations": [
+        "nodemon",
+        "debug react"
+      ]
     }
   ]
 }

@@ -6,7 +6,7 @@ module.exports = ( passport ) => {
   passport.use( new GoogleStrategy( {
     clientID: keys.googleWebOauth.client_id,
     clientSecret: keys.googleWebOauth.client_secret,
-    callbackURL: '/auth/google/callback'
+    callbackURL: '/api/auth/google/callback'
   }, ( accessToken, refreshToken, profile, done ) => {
     console.log( profile );
     User.findOne( { googleId: profile.id } )
