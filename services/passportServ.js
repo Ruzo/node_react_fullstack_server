@@ -7,33 +7,33 @@ module.exports = ( passport ) => {
     clientID: keys.googleWebOauth.client_id,
     clientSecret: keys.googleWebOauth.client_secret,
     callbackURL: '/api/auth/google/callback'
-  }, ( accessToken, refreshToken, profile, done ) => {
-    console.log( profile );
-    User.findOne( { googleId: profile.id } )
-      .then( user => {
-        if ( user ) {
-          done( null, user );
-        }
-        else {
-          new User( {
-            googleId: profile.id,
-            name: profile.displayName,
-            email: profile.emails[ 0 ]
-          } )
-            .save()
-            .then( user => done( null, user ) )
-            .catch( err => console.log( err ) );
-        }
-      } );
+  }, async ( accessToken, refreshToken, profile, done ) => {
+    const user = await User.findOne( { googleId: profile.id } );
+    if ( user ) {
+      done( null, user );
+    }
+    else {
+      try {
+        const user = await new User( {
+          googleId: profile.id,
+          name: profile.displayName,
+          email: profile.emails[ 0 ]
+        } ).save();
+        done( null, user );
+      }
+      catch ( err ) {
+        err => console.log( err );
+      }
+    }
   } ) );
 
   passport.serializeUser( ( user, done ) => {
     done( null, user.id );
   } );
 
-  passport.deserializeUser( ( id, done ) => {
-    User.findById( id )
-      .then( user => done( null, user ) );
+  passport.deserializeUser( async ( id, done ) => {
+    const user = await User.findById( id );
+    done( null, user );
   } );
 }
 

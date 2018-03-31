@@ -9,10 +9,14 @@ class App extends Component {
     user: ''
   };
 
-  componentDidMount() {
-    this.fetchUser()
-      .then( user => this.setState( { user: user.name || null } ) )
-      .catch( err => clog( 'Fetch Error: ', err ) );
+  async componentDidMount() {
+    try {
+      const user = await this.fetchUser();
+      this.setState( { user: user.name || null } );
+    }
+    catch ( err ) {
+      clog( 'Fetch Error: ', err )
+    }
   }
 
   fetchUser = async () => {
