@@ -4,9 +4,10 @@ module.exports = ( passport ) => {
   const User = require( '../models/user' );
 
   passport.use( new GoogleStrategy( {
-    clientID: keys.googleWebOauth.client_id,
-    clientSecret: keys.googleWebOauth.client_secret,
-    callbackURL: '/api/auth/google/callback'
+    clientID: keys.dev.googleWebOauth.client_id,
+    clientSecret: keys.dev.googleWebOauth.client_secret,
+    callbackURL: '/api/auth/google/callback',
+    proxy: true
   }, async ( accessToken, refreshToken, profile, done ) => {
     const user = await User.findOne( { googleId: profile.id } );
     if ( user ) {

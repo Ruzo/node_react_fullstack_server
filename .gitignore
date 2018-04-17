@@ -1,5 +1,6 @@
 # app specific
-keys.js
+dev.js
+.env.*
 
 # Logs
 logs
