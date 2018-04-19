@@ -1,7 +1,6 @@
 import React, { Component, createContext } from 'react';
-import { fetchUser } from '../../utils/api';
+import { fetchUser, makePayment } from '../../utils/api';
 
-const clog = console.log;
 
 export const StateContext = createContext();
 
@@ -11,8 +10,14 @@ export default class StateProvider extends Component {
   }
   async componentDidMount() {
     const user = await fetchUser();
-    clog( 'Inside StateProvider', user );
+    console.log( 'Inside StateProvider', user );
     this.setState( { user } );
+  }
+
+  handlePayment = async ( charge ) => {
+    const { updatedUser, status } = await makePayment( charge );
+    console.log( 'TRANSACTION STATUS: ', status );
+    this.setState( { user: updatedUser } );
   }
 
   render() {
@@ -20,6 +25,9 @@ export default class StateProvider extends Component {
       <StateContext.Provider value={ {
         auth: {
           user: this.state.user
+        },
+        payment: {
+          checkout: ( charge ) => this.handlePayment( charge )
         }
       } }>
         { this.props.children }

@@ -6,12 +6,23 @@ const clog = console.log;
 
 export default class Header extends Component {
 
-  renderHeader = ( { user } ) => {
+  renderHeader = ( { user }, { checkout } ) => {
     clog( 'renderHeader user', user );
     return (
       <StyledHeader
-        loginButtonText={ user.googleId ? 'Logout' : 'Login With Google' }
-        reqPath={ user.googleId ? '/api/logout' : '/api/auth/google' }
+        loginButtonContent={
+          user.googleId
+            ? {
+              label: 'Logout',
+              path: '/api/logout'
+            }
+            : {
+              label: 'Login With Google',
+              path: '/api/auth/google'
+            }
+        }
+        makePayment={ checkout }
+        credits={ user.credits }
       />
     )
   }
@@ -19,7 +30,7 @@ export default class Header extends Component {
   render() {
     return (
       <StateContext.Consumer>
-        { state => this.renderHeader( state.auth )
+        { state => state ? this.renderHeader( state.auth, state.payment ) : null
         }
       </StateContext.Consumer>
     )
