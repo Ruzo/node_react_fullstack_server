@@ -19,11 +19,12 @@ require( './routes' )( app, passport );
 
 if ( process.env.NODE_ENV === 'production' ) {
   console.log( 'IN PRODUCTION MODE!' );
+
+  const path = require( 'path' );
   // Serve up production assets from build folder
-  app.use( express.static( '/client/build' ) );
+  app.use( express.static( path.join( __dirname, '/client/build' ) ) );
 
   // Send index.html when route is not recognized
-  const path = require( 'path' );
   app.get( '*', ( req, res ) => {
     res.sendFile( path.resolve( __dirname, 'client', 'build', 'index.html' ) );
   } );
