@@ -8,6 +8,7 @@
     "npm": "5.6.0"
   },
   "scripts": {
+    "start": "node index.js",
     "server": "nodemon index.js",
     "client": "cd client && npm run start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
