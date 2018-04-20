@@ -12,7 +12,7 @@ export const fetchUser = async () => {
 };
 
 export const makePayment = async ( charge ) => {
-  const payment = await fetch( '/api/stripe/payment', {
+  const payment = await fetch( '/api/payment', {
     headers: {
       "Content-Type": "application/json"
     },

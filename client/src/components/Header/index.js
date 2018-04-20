@@ -23,6 +23,7 @@ export default class Header extends Component {
         }
         makePayment={ checkout }
         credits={ user.credits }
+        user={ user }
       />
     )
   }
@@ -30,7 +31,7 @@ export default class Header extends Component {
   render() {
     return (
       <StateContext.Consumer>
-        { state => state ? this.renderHeader( state.auth, state.payment ) : null
+        { state => this.renderHeader( state.auth, state.payment )
         }
       </StateContext.Consumer>
     )

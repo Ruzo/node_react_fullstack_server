@@ -7,21 +7,25 @@ import StyledLogo from './Logo'
 import LoginButton from './LoginButton'
 import Credits from './Credits'
 
-export default ( { loginButtonContent, makePayment, credits } ) => {
+export default ( { loginButtonContent, makePayment, credits, user } ) => {
   return (
     <StyledHeader>
       <StyledLogo to='/'>EMAILY</StyledLogo>
       <ButtonsWrapper>
-        <Credits>Credits: { credits || 0 }</Credits>
-        <StripeCheckout
-          name='EMAILY'
-          description='$5 for 5 credits'
-          token={ makePayment }
-          stripeKey={ process.env.REACT_APP_STRIPE_KEY }
-          amount={ 500 }
-        >
-          <BuyButton>Buy</BuyButton>
-        </StripeCheckout>
+        { user.googleId && (
+          <React.Fragment>
+            <Credits>Credits: { credits || 0 }</Credits>
+            <StripeCheckout
+              name='EMAILY'
+              description='$5 for 5 credits'
+              token={ makePayment }
+              stripeKey={ process.env.REACT_APP_STRIPE_KEY }
+              amount={ 500 }
+            >
+              <BuyButton>Buy</BuyButton>
+            </StripeCheckout>
+          </React.Fragment>
+        ) }
         <LoginButton
           href={ loginButtonContent.path }
         >{ loginButtonContent.label }</LoginButton>
