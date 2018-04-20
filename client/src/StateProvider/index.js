@@ -1,5 +1,5 @@
 import React, { Component, createContext } from 'react';
-import { fetchUser, makePayment } from '../../utils/api';
+import { fetchUser, makePayment } from '../utils/api';
 
 
 export const StateContext = createContext();
