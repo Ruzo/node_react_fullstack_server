@@ -18,17 +18,17 @@ app.use( passport.session() );
 
 require( './routes' )( app, passport );
 
-if ( process.env.NODE_ENV === 'production' ) {
-  console.log( 'IN PRODUCTION MODE!' );
+// if ( process.env.NODE_ENV === 'production' ) {
+//   console.log( 'IN PRODUCTION MODE!' );
 
-  // Serve up production assets from build folder
-  app.use( express.static( path.join( __dirname, '/client/build' ) ) );
+//   // Serve up production assets from build folder
+//   app.use( express.static( path.join( __dirname, '/client/build' ) ) );
 
-  // Send index.html when route is not recognized
-  app.get( '*', ( req, res ) => {
-    res.sendFile( path.resolve( __dirname, 'client', 'build', 'index.html' ) );
-  } );
-}
+//   // Send index.html when route is not recognized
+//   app.get( '*', ( req, res ) => {
+//     res.sendFile( path.resolve( __dirname, 'client', 'build', 'index.html' ) );
+//   } );
+// }
 
 const PORT = process.env.PORT || 5000;
 console.log( 'Listening on port ', PORT );
