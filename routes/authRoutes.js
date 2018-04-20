@@ -1,4 +1,3 @@
-const path = require( 'path' );
 module.exports = ( app, passport ) => {
 
   app.get( '/api/login_error', ( req, res ) => res.send( {
@@ -16,7 +15,7 @@ module.exports = ( app, passport ) => {
     res.redirect( '/' );
   } );
 
-  app.get( path.join( __dirname, '/api/auth/google' ), passport.authenticate( 'google', {
+  app.get( '/api/auth/google', passport.authenticate( 'google', {
     scope: [ 'profile', 'email' ]
   } )
   );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import StyledHeader from './Header'
-import { StateContext } from '../StateProvider'
+import { StateContext } from '../../StateProvider'
 
 const clog = console.log;
 

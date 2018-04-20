@@ -3,6 +3,7 @@ const app = express();
 const cookieSession = require( 'cookie-session' );
 const passport = require( 'passport' );
 const bodyParser = require( 'body-parser' );
+const path = require( 'path' );
 
 const keys = require( './config/keys' );
 require( './services/passportServ' )( passport );
@@ -20,7 +21,6 @@ require( './routes' )( app, passport );
 if ( process.env.NODE_ENV === 'production' ) {
   console.log( 'IN PRODUCTION MODE!' );
 
-  const path = require( 'path' );
   // Serve up production assets from build folder
   app.use( express.static( path.join( __dirname, '/client/build' ) ) );
 

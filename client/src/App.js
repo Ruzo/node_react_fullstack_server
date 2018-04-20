@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import glamorous from 'glamorous';
 
-import StateProvider from './components/StateProvider'
+import StateProvider from './StateProvider'
 import Header from './components/Header'
 import Dashboard from './components/Dashboard'
 
