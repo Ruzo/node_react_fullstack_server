@@ -18,6 +18,7 @@ app.use( passport.session() );
 require( './routes' )( app, passport );
 
 if ( process.env.NODE_ENV === 'production' ) {
+  console.log( 'IN PRODUCTION MODE!' );
   // Serve up production assets from build folder
   app.use( express.static( '/client/build' ) );
 
