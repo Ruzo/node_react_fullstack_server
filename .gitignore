@@ -1,6 +1,6 @@
 # app specific
 dev.js
-.env.*
+.env.development
 
 # Logs
 logs
