@@ -1,11 +1,11 @@
-import React from 'react'
-import glamorous from 'glamorous'
+import glamorous from 'glamorous';
+import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import BuyButton from './BuyButton';
+import Credits from './Credits';
+import LoginButton from './LoginButton';
+import StyledLogo from './Logo';
 
-import BuyButton from './BuyButton'
-import StyledLogo from './Logo'
-import LoginButton from './LoginButton'
-import Credits from './Credits'
 
 export default ( { loginButtonContent, makePayment, credits, user } ) => {
   return (

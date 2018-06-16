@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
-import StyledHeader from './Header'
-import { StateContext } from '../../StateProvider'
-
-const clog = console.log;
+import React, { Component } from 'react';
+import StyledHeader from './Header';
+import { StateContext } from '../../StateProvider';
 
 export default class Header extends Component {
 
   renderHeader = ( { user }, { checkout } ) => {
-    clog( 'renderHeader user', user );
+    console.log( 'renderHeader user', user );
     return (
       <StyledHeader
         loginButtonContent={
